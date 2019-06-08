@@ -11,7 +11,11 @@ raw = PiRGBArray( cam, size=(320, 240) )
 time.sleep( 1 )
 for frameBGR in cam.capture_continuous( raw, format="bgr", use_video_port=True ):
     imgBGR = frameBGR.array
-    cv2.imshow( 'Video', imgBGR )
+
+    plt.imshow(img, cmap = 'gray', interpolation = 'bicubic')
+    plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
+    plt.show() 
+
     key = cv2.waitKey(1) & 0xFF
     raw.truncate(0)
     if key == ord( "q" ):
