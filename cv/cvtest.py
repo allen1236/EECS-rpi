@@ -9,17 +9,11 @@ cam = PiCamera()
 cam.resolution = (320, 240)
 cam.framerate = 30
 raw = PiRGBArray( cam, size=(320, 240) )
-time.sleep( 1 )
+time.sleep( 1 ) # camera worm up
+cam.start_preview()
+
 for frameBGR in cam.capture_continuous( raw, format="bgr", use_video_port=True ):
     imgBGR = frameBGR.array
     imgRGB = imgBGR[:,:,::-1]
-
-    #plt.imshow(img, cmap = 'gray', interpolation = 'bicubic')
-    #plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
-    plt.imshow( imgRGB )
-    plt.show() 
-
-    key = cv2.waitKey(1) & 0xFF
-    raw.truncate(0)
-    if key == ord( "q" ):
-        break
+    print( imgRGB.shape )
+    raw.truncate(0) #clear the buffer
