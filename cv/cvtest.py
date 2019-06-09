@@ -14,6 +14,7 @@ cam.start_preview()
 
 for frameBGR in cam.capture_continuous( raw, format="bgr", use_video_port=True ):
     imgBGR = frameBGR.array
-    imgRGB = imgBGR[:,:,::-1]
-    print( imgRGB.shape )
+
+
+
     raw.truncate(0) #clear the buffer
